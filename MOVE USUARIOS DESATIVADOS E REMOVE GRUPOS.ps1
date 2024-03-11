@@ -2,14 +2,22 @@
 $sourceOU = "OU=UsuáriosDesativados,DC=exemplo,DC=com"
 $destinationOU = "OU=ArquivoMorto,DC=exemplo,DC=com"
 
-# Defina o caminho do arquivo de log
-$logPath = "C:\Logs\usuarios-movidos.log"
+# Defina o caminho do diretório de logs
+$logDirectory = "C:\Logs"
 
-# Verifique se a pasta de log existe. Se não existir, crie a pasta
-if (!(Test-Path -Path (Split-Path $logPath))) {
-    Write-Host "Pasta de log não encontrada. Criando pasta em $(Split-Path $logPath)..." -ForegroundColor Yellow
-    New-Item -ItemType Directory -Path (Split-Path $logPath) | Out-Null
+# Crie o diretório de logs se não existir
+if (!(Test-Path -Path $logDirectory)) {
+    Write-Host "Diretório de logs não encontrado. Criando diretório em $logDirectory..." -ForegroundColor Yellow
+    New-Item -ItemType Directory -Path $logDirectory | Out-Null
 }
+
+# Crie o nome do arquivo de log baseado na data e hora atual
+$logFileName = "usuarios-movidos-$((Get-Date).ToString('yyyyMMdd-HHmmss')).log"
+$logPath = Join-Path -Path $logDirectory -ChildPath $logFileName
+
+# Crie o nome do arquivo CSV baseado na data e hora atual
+$csvFileName = "usuarios-movidos-$((Get-Date).ToString('yyyyMMdd-HHmmss')).csv"
+$csvPath = Join-Path -Path $logDirectory -ChildPath $csvFileName
 
 # Obtenha todos os usuários desativados na OU de origem
 $users = Get-ADUser -Filter {Enabled -eq $false} -SearchBase $sourceOU
@@ -20,11 +28,21 @@ if (!$users) {
     Exit
 }
 
+# Array para armazenar os dados para o CSV
+$csvData = @()
+
 # Remova todos os grupos dos usuários desativados
 foreach ($user in $users) {
     Write-Host "Removendo grupos para o usuário $($user.SamAccountName)..." -ForegroundColor Green
-    Get-ADPrincipalGroupMembership -Identity $user | ForEach-Object {
+    $memberGroups = Get-ADPrincipalGroupMembership -Identity $user | Select-Object -ExpandProperty Name
+    $memberGroups | ForEach-Object {
         Remove-ADPrincipalGroupMembership -Identity $user -MemberOf $_ -Confirm:$false
+        # Adiciona os dados ao array CSV
+        $csvData += [PSCustomObject]@{
+            'Data' = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+            'Usuário' = $user.SamAccountName
+            'MemberGroup' = $_
+        }
     }
 }
 
@@ -38,4 +56,7 @@ foreach ($user in $users) {
     Add-Content -Path $logPath -Value $logMessage
 }
 
-Write-Host "Movimento de usuários concluído. Confira o arquivo de log em $logPath." -ForegroundColor Green
+# Exporta os dados para o CSV
+$csvData | Export-Csv -Path $csvPath -NoTypeInformation
+
+Write-Host "Movimento de usuários concluído. Confira o arquivo de log em $logPath e o arquivo CSV em $csvPath." -ForegroundColor Green
