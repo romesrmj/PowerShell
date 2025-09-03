@@ -5,7 +5,7 @@
 # =======================
 
 # Define o destino para testes
-$target = "teams.microsoft.com"
+$target = "outlook.microsoft.com"
 
 Write-Host "`n=== AVALIAÇÃO DE CONEXÃO PARA MICROSOFT TEAMS ===" -ForegroundColor Cyan
 
