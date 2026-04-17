@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Árvore ITSM Interativa - ITIL/COBIT</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f9f9f9; color: #333; }
+  h1 { color: #2a6ebb; text-align: center; }
+  ul { list-style-type: none; padding-left: 20px; }
+  li { margin: 4px 0; cursor: pointer; }
+  .category { font-weight: bold; color: #2a6ebb; }
+  .details { display: none; margin-left: 15px; background: #eef4fc; padding: 5px; border-left: 3px solid #2a6ebb; }
+  .sla { color: #555; font-style: italic; }
+  .type { color: #d35400; font-weight: bold; }
+  .group { color: #27ae60; }
+</style>
+</head>
+<body>
+<h1>Árvore ITSM Interativa - ITIL/COBIT</h1>
+
+<ul>
+  <li class="category" onclick="toggle(this)">1. Incidentes
+    <div class="details">
+      <p><strong>Descrição:</strong> Chamados para restaurar serviços afetados.</p>
+      <p><strong>Tipo:</strong> <span class="type">Incidente</span></p>
+      <p><strong>Responsável / Grupo:</strong> Equipe de Suporte / Infraestrutura</p>
+      <ul>
+        <li class="category" onclick="toggle(this)">Hardware
+          <div class="details">
+            <ul>
+              <li>Computadores / Laptops <span class="sla">(SLA: 4h crítico / 8h médio / 24h baixo)</span></li>
+              <li>Impressoras / Scanners <span class="sla">(SLA: 8h crítico / 16h médio / 48h baixo)</span></li>
+              <li>Equipamentos de rede <span class="sla">(SLA: 2h crítico / 4h médio / 12h baixo)</span></li>
+              <li>Outros periféricos <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+            </ul>
+          </div>
+        </li>
+        <li class="category" onclick="toggle(this)">Software
+          <div class="details">
+            <ul>
+              <li>Sistemas críticos (ERP, CRM, Financeiro) <span class="sla">(SLA: 2h crítico / 4h médio / 8h baixo)</span></li>
+              <li>Aplicativos de produtividade <span class="sla">(SLA: 4h médio / 16h baixo)</span></li>
+              <li>Navegadores / Plugins <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+            </ul>
+          </div>
+        </li>
+        <li class="category" onclick="toggle(this)">Acesso e Autenticação
+          <div class="details">
+            <ul>
+              <li>Reset de senha <span class="sla">(SLA: 1h crítico / 4h médio)</span></li>
+              <li>Conta bloqueada <span class="sla">(SLA: 1h crítico / 2h médio)</span></li>
+              <li>Permissões incorretas <span class="sla">(SLA: 4h médio / 12h baixo)</span></li>
+            </ul>
+          </div>
+        </li>
+        <li class="category" onclick="toggle(this)">Rede e Conectividade
+          <div class="details">
+            <ul>
+              <li>Internet lenta / instável <span class="sla">(SLA: 2h crítico / 8h médio)</span></li>
+              <li>VPN / acesso remoto <span class="sla">(SLA: 2h crítico / 4h médio)</span></li>
+              <li>Wi-Fi indisponível <span class="sla">(SLA: 4h crítico / 8h médio)</span></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="category" onclick="toggle(this)">2. Requisições de Serviço
+    <div class="details">
+      <p><strong>Descrição:</strong> Solicitações de serviços padrão e provisionamento de recursos.</p>
+      <p><strong>Tipo:</strong> <span class="type">Requisição</span></p>
+      <p><strong>Responsável / Grupo:</strong> Equipe de Suporte / Atendimento ao Usuário</p>
+      <ul>
+        <li class="category" onclick="toggle(this)">Hardware
+          <div class="details">
+            <ul>
+              <li>Novo equipamento <span class="sla">(SLA: 24h médio / 72h baixo)</span></li>
+              <li>Periféricos <span class="sla">(SLA: 24h médio / 72h baixo)</span></li>
+              <li>Substituição de equipamento <span class="sla">(SLA: 8h crítico / 24h médio)</span></li>
+            </ul>
+          </div>
+        </li>
+        <li class="category" onclick="toggle(this)">Software
+          <div class="details">
+            <ul>
+              <li>Instalação / atualização <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+              <li>Solicitação de licenças <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+              <li>Configuração de aplicativos <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+            </ul>
+          </div>
+        </li>
+        <li class="category" onclick="toggle(this)">Acesso e Permissões
+          <div class="details">
+            <ul>
+              <li>Novo usuário / conta <span class="sla">(SLA: 4h crítico / 8h médio)</span></li>
+              <li>Alteração de perfil / função <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+              <li>Solicitação de acesso a sistemas <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+            </ul>
+          </div>
+        </li>
+        <li class="category" onclick="toggle(this)">Informação e Suporte
+          <div class="details">
+            <ul>
+              <li>Orientações de sistemas <span class="sla">(SLA: 24h médio / 48h baixo)</span></li>
+              <li>Treinamento <span class="sla">(SLA: 48h médio / 72h baixo)</span></li>
+              <li>Consultoria técnica <span class="sla">(SLA: 24h médio / 48h baixo)</span></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="category" onclick="toggle(this)">3. Problemas
+    <div class="details">
+      <p><strong>Descrição:</strong> Análise de causas raiz para prevenir incidentes recorrentes.</p>
+      <p><strong>Tipo:</strong> <span class="type">Problema</span></p>
+      <p><strong>Responsável / Grupo:</strong> Equipe de Infraestrutura / TI</p>
+      <ul>
+        <li>Problema recorrente de hardware <span class="sla">(SLA: 48h médio / 7 dias baixo)</span></li>
+        <li>Problema recorrente de software <span class="sla">(SLA: 24h crítico / 72h médio)</span></li>
+        <li>Análise de causa de incidentes críticos <span class="sla">(SLA: 8h crítico / 24h médio)</span></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="category" onclick="toggle(this)">4. Mudanças
+    <div class="details">
+      <p><strong>Descrição:</strong> Solicitação e implementação de alterações controladas na TI.</p>
+      <p><strong>Tipo:</strong> <span class="type">Mudança</span></p>
+      <p><strong>Responsável / Grupo:</strong> Change Advisory Board / Equipe de TI</p>
+      <ul>
+        <li>Atualizações de software / sistemas <span class="sla">(SLA: conforme janela de manutenção / 24h médio)</span></li>
+        <li>Migração de sistemas ou dados <span class="sla">(SLA: conforme planejamento / 72h baixo)</span></li>
+        <li>Alterações de rede / infraestrutura <span class="sla">(SLA: 8h crítico / 24h médio)</span></li>
+        <li>Implementação de novos serviços <span class="sla">(SLA: Planejado / 5 dias baixo)</span></li>
+        <li>Solicitação de aprovação de mudança crítica <span class="sla">(SLA: 4h crítico / 24h médio)</span></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="category" onclick="toggle(this)">5. Gerenciamento de Ativos / Configuração
+    <div class="details">
+      <p><strong>Descrição:</strong> Controle e documentação de ativos e configuração da TI.</p>
+      <p><strong>Tipo:</strong> <span class="type">Ativo / Configuração</span></p>
+      <p><strong>Responsável / Grupo:</strong> Equipe de Configuração / Inventário</p>
+      <ul>
+        <li>Inventário de hardware/software <span class="sla">(SLA: 48h médio / 5 dias baixo)</span></li>
+        <li>Atualização de CMDB <span class="sla">(SLA: 48h médio / 7 dias baixo)</span></li>
+        <li>Auditoria de ativos de TI <span class="sla">(SLA: 5 dias baixo)</span></li>
+        <li>Retirada / substituição de equipamentos <span class="sla">(SLA: 8h crítico / 24h médio)</span></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="category" onclick="toggle(this)">6. Segurança da Informação
+    <div class="details">
+      <p><strong>Descrição:</strong> Gestão de incidentes e solicitações de segurança da informação.</p>
+      <p><strong>Tipo:</strong> <span class="type">Segurança</span></p>
+      <p><strong>Responsável / Grupo:</strong> Equipe de Segurança da Informação</p>
+      <ul>
+        <li>Malware / vírus <span class="sla">(SLA: 1h crítico / 4h médio)</span></li>
+        <li>Phishing / fraude <span class="sla">(SLA: 1h crítico / 2h médio)</span></li>
+        <li>Conta comprometida <span class="sla">(SLA: 1h crítico / 4h médio)</span></li>
+        <li>Solicitação de antivírus / firewall <span class="sla">(SLA: 8h médio / 24h baixo)</span></li>
+        <li>Criptografia de dados <span class="sla">(SLA: 24h médio / 72h baixo)</span></li>
+        <li>Revisão de políticas de acesso <span class="sla">(SLA: 5 dias baixo)</span></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="category" onclick="toggle(this)">7. Governança, Risco e Conformidade
+    <div class="details">
+      <p><strong>Descrição:</strong> Controle de risco, conformidade e auditoria de TI.</p>
+      <p><strong>Tipo:</strong> <span class="type">Governança</span></p>
+      <p><strong>Responsável / Grupo:</strong> TI / Compliance / Auditoria</p>
+      <ul>
+        <li>Solicitação de relatório de conformidade <span class="sla">(SLA: 5 dias baixo)</span></li>
+        <li>Solicitação de auditoria de TI <span class="sla">(SLA: 7 dias baixo)</span></li>
+        <li>Gestão de risco operacional <span class="sla">(SLA: 24h médio / 72h baixo)</span></li>
+        <li>Revisão de processos e controles <span class="sla">(SLA: 5 dias baixo)</span></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="category" onclick="toggle(this)">8. Outros / Geral
+    <div class="details">
+      <p><strong>Descrição:</strong> Solicitações gerais, feedbacks ou melhorias.</p>
+      <p><strong>Tipo:</strong> <span class="type">Outro</span></p>
+      <p><strong>Responsável / Grupo:</strong> Equipe de Suporte / Administração</p>
+      <ul>
+        <li>Sugestões de melhoria <span class="sla">(SLA: 7 dias baixo)</span></li>
+        <li>Feedback do usuário <span class="sla">(SLA: 5 dias baixo)</span></li>
+        <li>Questões administrativas <span class="sla">(SLA: 5 dias baixo)</span></li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
+<script>
+function toggle(element) {
+  const details = element.querySelector('.details');
+  if (details) {
+    details.style.display = details.style.display === 'block' ? 'none' : 'block';
+  }
+  event.stopPropagation();
+}
+</script>
+</body>
+</html>
